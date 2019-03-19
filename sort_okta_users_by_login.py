@@ -14,7 +14,7 @@ OUT_HEADERS = [
     ]
 
 # open file, populate a dictionary with last login timestamp and login name
-with open('OktaPasswordHealth.csv') as f:
+with open("OktaPasswordHealth.csv") as f:
     F_CSV = csv.reader(f)
     HEADERS = [re.sub('[^a-zA-Z_]', '_', h) for h in next(F_CSV)]
     ROW = namedtuple('ROW', HEADERS)
@@ -33,7 +33,7 @@ for last_login, login in sorted(USERS.items(), reverse=True):
 with open("users_sorted_by_last_login.csv", "w") as out_file:
     OUT_CSV = csv.writer(out_file)
     OUT_CSV.writerow(OUT_HEADERS)
-    for last_login, login in USERS.items():
+    for last_login, login in sorted(USERS.items(), reverse=True):
         keys_values = (login, last_login)
         OUT_CSV.writerow(keys_values)
 
